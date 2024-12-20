@@ -3,7 +3,7 @@ version: '3'
 services:
   web:
     
-    image: myfirstdocker:v2
+    image: myfirstdocker:v1
     ports:
       - "80:80"   
     
