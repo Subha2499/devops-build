@@ -15,18 +15,10 @@ stages {
 stage('Push to Devops-Build Repository'){
 {
 steps{
+    sh 'docker login -u subha2499 -p 
 sh 'docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${REGISTRY}/dev/${APP_NAME}/web'
 sh 'docker push ${REGISTRY}/dev/{$APP_NAME}/web'
 }
 }
-stage('Release the Image') {
-            steps {
-                script {
-                   sh 'web container:release web --app=${APP_NAME}'
-                }
-            }
 }
-}
-}
-}
-}
+            
