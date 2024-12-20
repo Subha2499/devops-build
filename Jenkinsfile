@@ -1,24 +1,18 @@
 pipeline {
-    agent any 
-environment {
-IMAGE_NAME = "myfirstdocker"
-IMAGE_TAG = "v2"
-APP_NAME = "REACTAPP"
-REGISTRY = "registry.subha2499"
-}
-stages {
-        stage('Build') {
+    agent any
+
+    stages {
+        stage('Build and Push Docker Image') {
             steps {
-              sh 'docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .'
+                // Grant executable permissions to the build script
+                sh 'chmod +x deploy.sh'
+
+                // Build the Docker image using the build script
+                sh './deploy.sh'
+
+                
             }
         }
-stage('Push to Devops-Build Repository'){
-{
-steps{
-    sh 'docker login -u subha2499 -p 
-sh 'docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${REGISTRY}/dev/${APP_NAME}/web'
-sh 'docker push ${REGISTRY}/dev/{$APP_NAME}/web'
+
+    }
 }
-}
-}
-            
